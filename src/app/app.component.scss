@@ -1,0 +1,100 @@
+// App Styles
+// ----------------------------------------------------------------------------
+// Put style rules here that you want to apply to the entire application. These
+// styles are for the entire app and not just one component. Additionally, this
+// file can hold Sass mixins, functions, and placeholder classes to be imported
+// and used throughout the application.
+
+.full-width
+{
+  width: 100%;
+}
+
+.blue-button
+{
+  background: #2196F3;
+  color: whitesmoke;
+  padding: 1%;
+}
+
+.grey-button
+{
+  background: #009688;
+  color: whitesmoke;
+  padding: 1%;
+}
+
+.link-text
+{
+  color: dodgerblue;
+}
+
+.text-light-grey
+{
+  color: #767676;
+}
+
+.text-dark-grey
+{
+  color: #212121;
+}
+
+.m-n-t-1
+{
+  margin-top: -1px;
+}
+
+
+.m-n-t-2
+{
+  margin-top: -2px;
+}
+
+
+.m-n-t-3
+{
+  margin-top: -3px;
+}
+
+
+.m-n-t-4
+{
+  margin-top: -4px;
+}
+
+
+.m-n-t-5
+{
+  margin-top: -5px;
+}
+
+
+.m-n-t-6
+{
+  margin-top: -6px;
+}
+
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.color-light
+{
+  color: #fafafa;
+}
+
+
+.header p
+{
+  margin-bottom: 0!important;
+}
+.side-nav
+{
+  font-family: 'Karla', sans-serif!important;
+}
+.mat-dialog-container {
+  padding: 5px!important;
+}

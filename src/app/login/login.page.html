@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="m1 bg-gray muted">
+    <mat-card>
+
+      <div class="login-content">
+
+        <div class="mt1">
+          <img src="assets/icon/icon.png" width="10%" height="10%" class="block mx-auto">
+          <h3 class="logo inline" style="margin-bottom: 5%">MoovTo Riders</h3>
+        </div>
+
+      </div>
+
+      <form class="login-form">
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Email or username" type="email" #email>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <input matInput placeholder="Password" type="password" #password>
+        </mat-form-field>
+
+
+        <button mat-raised-button (click)="login(email.value, password.value)" class="mt2 full-width blue-button">Login</button>
+
+      </form>
+
+
+    </mat-card>
+
+  </div>
+
+</ion-content>

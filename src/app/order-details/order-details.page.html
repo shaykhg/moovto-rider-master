@@ -1,0 +1,298 @@
+<ion-header>
+  <ion-toolbar>
+    <div class="dis-flex justify-content-between">
+            <span  class="align-self-center">
+                <ion-title >Order details</ion-title>
+            </span>
+      <span>
+        <ion-icon routerLink="/" class="fs-24 m-r-10" name="close"></ion-icon>
+      </span>
+    </div>
+  </ion-toolbar>
+
+
+</ion-header>
+
+<ion-content>
+
+
+  <div class="container p-3" *ngIf="orders">
+    <div class="pe-4">
+      <p class="notes mb-1 fw-bold">Order Id </p>
+      <h3 class="fs-16 ">{{orders.id}}</h3>
+    </div>
+
+    <mat-card>
+      <div class="row">
+        <div class="col-2" style="margin-top: 18px;">
+          <img src="../../assets/deliveryhistory/details/name.png" alt="" class="hist_icon" />
+        </div>
+        <div class="col-4">
+          <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Name</p>
+          <h3 class="fs-16">{{orders.user.name}} </h3>
+        </div>
+        <div class="col-2" style="margin-top: 18px;">
+          <img src="../../assets/deliveryhistory/details/euro.png" alt="" class="hist_icon" />
+        </div>
+        <div class="col-4">
+          <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Total</p>
+          <h3 class="fs-16">{{orders.total | currency:'EUR' : true}}</h3>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+
+        <div class="col-2" style="margin-top: 18px;">
+          <img src="../../assets/deliveryhistory/details/status.png" alt="" class="hist_icon" />
+
+        </div>
+        <div class="col-4">
+          <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Status</p>
+          <h3 class="fs-16">
+            {{orders.status}}
+          </h3>
+        </div>
+        <div class="col-2" style="margin-top: 18px;">
+          <img src="../../assets/deliveryhistory/details/map.png" alt="" class="hist_icon" />
+        </div>
+        <div class="col-4">
+          <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Distance</p>
+          <h3 class="fs-16">{{orders.distance}} km </h3>
+        </div>
+      </div>
+
+      <div  *ngIf="orders.packetId ? orders.packetId.length > 0 : false" class="row mt-3">
+
+        <div class="col-2" style="margin-top: 18px;">
+          <img src="../../assets/deliveryhistory/details/wrapping.png" alt="" class="hist_icon" />
+
+        </div>
+        <div class="col-10">
+          <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Packet Id</p>
+          <h3 class="fs-16">
+            {{orders.packetId}}
+          </h3>
+        </div>
+<!--        <div class="col-2" style="margin-top: 18px;">-->
+<!--&lt;!&ndash;          <img src="assets/deliveryhistory/details/map.png" alt="" class="hist_icon" />&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="col-4">-->
+<!--&lt;!&ndash;          <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Distance</p>&ndash;&gt;-->
+<!--&lt;!&ndash;          <h3 class="fs-16">{{orders.distance}} km </h3>&ndash;&gt;-->
+<!--        </div>-->
+      </div>
+
+      <div  *ngIf="orders.post_service ? orders.post_service.length > 0 : false" class="row mt-3">
+        <div class="col-2" style="margin-top: 18px;">
+          <img src="../../assets/deliveryhistory/details/postbox.png" alt="" class="hist_icon" />
+        </div>
+        <div class="col-10">
+          <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Post Service</p>
+          <h3 class="fs-16">
+            {{orders.post_service}}
+          </h3>
+        </div>
+      </div>
+
+    </mat-card>
+
+    <mat-card class="m-t-10">
+      <div class="row" >
+        <div class="col-2" style="margin-top: 18px;">
+          <img src="assets/deliveryhistory/details/vehicle.png" alt="" class="hist_icon" />
+        </div>
+        <div class="col-4">
+          <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Vehicle</p>
+          <h3 class="fs-16">{{orders.vehicle.name}}</h3>
+        </div>
+
+
+        <div class="col-2" style="margin-top: 18px;">
+          <img src="assets/deliveryhistory/details/People.png" alt="" class="hist_icon" />
+        </div>
+        <div class="col-4">
+          <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">People</p>
+          <h3 class="fs-16">{{orders.people}} Person</h3>
+        </div>
+      </div>
+      <div class="row" >
+        <div class="col-2" style="margin-top: 18px;">
+          <img src="assets/deliveryhistory/details/Date.png" alt="" class="hist_icon" />
+        </div>
+        <div class="col-10">
+          <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Date</p>
+          <h3 class="fs-16">{{data.getHumanShortDate(orders.date)}}</h3>
+        </div>
+
+        <div class="col-2" style="margin-top: 18px;">
+          <img src="assets/deliveryhistory/clock.png" alt="" class="hist_icon" />
+        </div>
+        <div class="col-10">
+          <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Date</p>
+          <h3 class="fs-16">{{data.returnTime(orders.from)}} - {{data.returnTime(orders.till)}}</h3>
+        </div>
+      </div>
+    </mat-card>
+
+<mat-card class="m-t-10">
+  <h5>Pickup Details</h5>
+  <div class="row" >
+    <div class="col-2" style="margin-top: 18px;">
+      <img src="assets/deliveryhistory/details/name.png" alt="" class="hist_icon" />
+    </div>
+    <div class="col-10">
+      <p class="mt-2 fs-6 mb-1" style="opacity: 0.5;">Name</p>
+      <h3 class="fs-16">{{orders.pickup.name}}</h3>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-2" style="margin-top: 18px;">
+      <img src="assets/deliveryhistory/details/phone-call.png" alt="" class="hist_icon" />
+    </div>
+    <div class="col-10">
+      <p class="mt-2 fs-6 mb-1" style="opacity: 0.5;">Phone</p>
+      <h3 class="fs-16">{{orders.pickup.phone}}</h3>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-2" style="margin-top: 18px;">
+      <img src="../../assets/deliveryhistory/details/loc.png" alt="" class="hist_icon" />
+    </div>
+    <div class="col-10">
+      <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Pickup Location</p>
+      <h3 class="fs-16">{{orders.pickup.googleLoc}}</h3>
+    </div>
+  </div>
+
+
+  <div class="row m-t-10" >
+    <div class="col-2" style="margin-top: 18px;">
+      <img src="../../assets/deliveryhistory/details/luggage-cart.png" alt="" class="hist_icon" />
+    </div>
+    <div class="col-10">
+      <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Pickup Address</p>
+      <h3 class="fs-16">{{orders.pickup.doorCode}}, {{orders.pickup.building }}, {{orders.pickup.city}} - {{orders.pickup.postCode}}</h3>
+    </div>
+  </div>
+  <div class="row mt-3" *ngIf="orders.pickup.noteForRider">
+
+    <div class="col-2">
+      <img src="../../assets/deliveryhistory/details/notes.png" alt="" class="hist_icon" />
+
+    </div>
+    <div class="col">
+      <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Pickup Notes</p>
+      <h3 class="fs-16" >
+        {{orders.pickup.noteForRider}}
+      </h3>
+    </div>
+
+
+    <div class="col-2" style="margin-top: 18px;">
+    </div>
+    <div class="col-4">
+
+    </div>
+  </div>
+
+  <hr>
+
+  <h5>Drop Details</h5>
+  <div class="row" >
+    <div class="col-2" style="margin-top: 18px;">
+      <img src="assets/deliveryhistory/details/name.png" alt="" class="hist_icon" />
+    </div>
+    <div class="col-10">
+      <p class="mt-2 fs-6 mb-1" style="opacity: 0.5;">Name</p>
+      <h3 class="fs-16">{{orders.drop.name}}</h3>
+    </div>
+  </div>
+  <div class="row" >
+    <div class="col-2" style="margin-top: 18px;">
+      <img src="assets/deliveryhistory/details/phone-call.png" alt="" class="hist_icon" />
+    </div>
+    <div class="col-10">
+      <p class="mt-2 fs-6 mb-1" style="opacity: 0.5;">Phone</p>
+      <h3 class="fs-16">{{orders.drop.phone}}</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2" style="margin-top: 18px;">
+      <img src="../../assets/deliveryhistory/details/loc.png" alt="" class="hist_icon" />
+    </div>
+    <div class="col-10">
+      <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Delivery Location</p>
+      <h3 class="fs-16">{{orders.drop.googleLoc}}</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-2" style="margin-top: 18px;">
+      <img src="../../assets/deliveryhistory/details/truck.png" alt="" class="hist_icon" />
+    </div>
+    <div class="col-10">
+      <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Delivery Address</p>
+      <h3 class="fs-16">{{orders.drop.doorCode}}, {{orders.drop.building}}, {{orders.drop.city}} - {{orders.drop.postCode}}</h3>
+    </div>
+  </div>
+  <div class="row mt-3" *ngIf="orders.drop.noteForRider">
+
+    <div class="col-2 " style="margin-top: 18px;">
+      <img src="../../assets/deliveryhistory/details/notes.png" alt="" class="hist_icon" />
+
+    </div>
+    <div class="col">
+      <p class="mt-2 fs-16 mb-1" style="opacity: 0.5;">Drop Notes</p>
+      <h3 class="fs-16" >
+        {{orders.drop.noteForRider}}
+      </h3>
+    </div>
+
+  </div>
+</mat-card>
+
+    <div>
+        <div class="row p-t-15" *ngIf="orders.type === '2'">
+          <div class="col">
+            <mat-label>Signature</mat-label>
+
+            <mat-card class="upld-img-card">
+              <img [src]="orders.signImage" alt="" style="width: 100%">
+            </mat-card>
+          </div>
+          <div class="col">
+            <mat-label>Parcel Image</mat-label>
+            <mat-card class="upld-img-card">
+              <img [src]="orders.parcelImage" alt="" style="width: 100%">
+            </mat-card>
+          </div>
+        </div>
+    </div>
+
+    <mat-accordion>
+      <mat-expansion-panel class="border-radius items" style="margin-top: 10px" *ngFor="let item of orders.items">
+        <mat-expansion-panel-header class="mat-exp-header">
+          <mat-panel-title>
+            <h5>{{item.name}}</h5>
+          </mat-panel-title>
+          <mat-panel-description>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+          <div  style="margin-top: 25px">
+            <div class="row"><span class="col-5 fs-18">Quantity:</span> <span class="col-6 fs-18">{{item.quantity}}</span></div>
+            <div class="row"><span class="col-5 fs-18">Weight:</span>
+              <span class="col-7 fs-18">{{item.weightType === 'kg' ? item.weight + ' kg' : item.weight + ' lbs'}}</span>
+            </div>
+            <div class="row"><span class="col-5 fs-18">Height:</span> <span class="col-6 fs-18">{{item.height + ' cm'}}</span></div>
+            <div class="row"><span class="col-5 fs-18">Width:</span> <span class="col-6 fs-18">{{item.width + ' cm'}}</span></div>
+            <div class="row"><span class="col-5 fs-18">Length:</span> <span class="col-6 fs-18">{{item.length + ' cm'}}</span></div>
+            <div class="row"><span class="col-5 fs-18">Description:</span> <span class="col-6 fs-18">{{item.description}}</span></div>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </div>
+
+</ion-content>

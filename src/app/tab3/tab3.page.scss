@@ -1,0 +1,21 @@
+.order-card
+{
+  margin: 10px;
+}
+.content{
+  background-color: #f9f9f9;
+  min-height: 100vh;
+  height: 100%;
+  margin-top: -7px;
+}
+*
+{
+  font-family: 'Karla', sans-serif;
+}
+
+.name{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow:ellipsis;
+}
+

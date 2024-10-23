@@ -1,0 +1,177 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            Home
+        </ion-title>
+        <ion-buttons slot="end" (click)="presentAlertConfirm()" >
+            <span>Logout</span><ion-icon class="m-r-5" name="md-power" style="zoom:1.5;">Logout</ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <div *ngIf="!data.socketService.delivery && !data.onGoing" class="m-t-100 text-center p-t-10">
+
+        <img height="100" src="/assets/images/box.png" width="100">
+        <h4 class="text-light-grey m-t-25">Waiting For Delivery Request!</h4>
+        <h6 class="text-red m-t-10">Please make sure location setting is turned on</h6>
+
+    </div>
+
+    <div *ngIf="data.onGoing && data.order">
+
+        <agm-map (mapClick)="map = !map" [latitude]="data.lat" [longitude]="data.lng" [zoom]="15">
+            <agm-marker [latitude]="data.order.pickup_lat" [longitude]="data.order.pickup_lng" iconUrl="assets/icon/pick.png">
+                <agm-info-window #infoWindow [disableAutoPan]="false">
+                    <div>
+                        Pickup Point
+                        <br>
+                        <h6>Name: {{data.order.pickup.name}} </h6>
+                        <p>Location: {{data.order.pickup.googleLoc}}}</p>
+                        <p>{{data.order.pickup.doorCode}}, {{data.order.pickup.postCode}}, {{data.order.pickup.city}}, Finland</p>
+                    </div>
+                </agm-info-window>
+            </agm-marker>
+
+            <agm-marker [latitude]="data.order.drop_lat" [longitude]="data.order.drop_lng" iconUrl="assets/icon/drop.png">
+                <agm-info-window #infoWindow [disableAutoPan]="false">
+                    <div>
+                        Drop Point
+                        <br>
+                        <h6>{{data.order.drop.name}} </h6>
+                        <h6>{{data.order.drop.googleLoc}} </h6>
+                        <p>{{data.order.drop.doorCode}} , {{data.order.drop.postCode}}
+                            , {{data.order.drop.city}}, Finland</p>
+                    </div>
+                </agm-info-window>
+            </agm-marker>
+
+            <agm-marker [latitude]="data.lat" [longitude]="data.lng" iconUrl="assets/icon/crosshairs-gps.svg">
+                <agm-info-window #infoWindow [disableAutoPan]="false">
+                    <div>
+                        Your Location
+                    </div>
+                </agm-info-window>
+            </agm-marker>
+        </agm-map>
+
+        <div class="delivery-details">
+            <ion-card *ngIf="data.status==='pickup'" class="delivery-card mat-elevation-z5">
+                <div class="content">
+                    <div class="row">
+                        <div (click)="convertToCard()" class="col-10">
+                            <ion-card-title>Ongoing Delivery : Pickup</ion-card-title>
+                            <ion-card-subtitle (click)="copyToClipBoard(data.order.id)">#{{data.order.id}}
+                                <mat-icon><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="#767676" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+                                </svg></mat-icon>
+                            </ion-card-subtitle>
+
+                        </div>
+
+                        <div (click)="openMap()" class="col-1 t-right">
+                            <div class="fab-button mat-elevation-z6">
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" fill="#ffffff"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="!map">
+                        <hr>
+                        <div *ngIf="data.order.parcel">
+                            <b>Parcel Delivery  - {{data.order.pickup.post_service.toUpperCase()}} </b>
+                        </div>
+
+                        <div *ngIf="!data.order.parcel">
+                            <p *ngFor="let item of data.order.items">• {{item.name}}</p>
+                        </div>
+                        <hr>
+                        <div *ngIf="data.order.parcel">
+                            <ion-grid>
+                                <ion-row>
+                                    <ion-col no-padding>
+                                        Packet Id : {{data.order.packetId}}
+                                    </ion-col>
+                                    <ion-col no-padding style="text-align: right">
+                                        <span style="color: dodgerblue" (click)="viewImagePopup(data.order.parcel.url)">View Image</span>
+                                    </ion-col>
+                                </ion-row>
+                                <ion-row style="margin-top: 8px">
+                                    <ion-col no-padding>
+                                    </ion-col>
+                                    <ion-col no-padding style="text-align: right">
+                                        <span style="color: dodgerblue" (click)="viewImagePopup(data.order.sign.url)">View Signature</span>
+                                    </ion-col>
+                                </ion-row>
+                            </ion-grid>
+                        </div>
+
+                        <h6>Name: {{data.order.pickup.name}} </h6>
+
+                        <h6>Location : {{data.order.pickup.googleLoc}}</h6>
+                        <h6>Address : {{data.order.pickup.doorCode}}, {{data.order.pickup.building}}
+                             {{data.order.pickup.city}}, Finland</h6>
+                        <h6>Phone: <a href="tel:{{data.order.pickup.phone}}">{{data.order.pickup.phone}}</a></h6>
+                        <h6>Notes: {{data.order.pickup.noteForRider}}</h6>
+                        <h6>Date: {{data.getHumanShortDate(data.order.date)}}</h6>
+                        <h6>From: {{data.returnTime(data.order.from)}}</h6>
+                        <h6>Postcode: {{data.order.pickup.postCode}}</h6>
+                        <h6>Req. People: {{data.order.people}} Person</h6>
+                        <h6>Req. Vehicle: {{data.order.vehicle.name}}</h6>
+                        <h6 [routerLink]="'/order-details/' + data.order.id" style="color: orangered;text-decoration: underline;cursor: pointer">View More Details</h6>
+                        <button (click)="data.markPickupComplete()" class="pickup-button" mat-raised-button>Pickup Complete
+                        </button>
+                    </div>
+                </div>
+            </ion-card>
+
+            <ion-card *ngIf="data.status==='drop'" class="delivery-card mat-elevation-z5">
+                <div class="content">
+                    <div>
+                        <div (click)="convertToCard()" class="col-10">
+                            <ion-card-title>Ongoing Delivery : Drop</ion-card-title>
+                            <ion-card-subtitle (click)="copyToClipBoard(data.order.id)">#{{data.order.id}}
+                                <mat-icon><svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="#767676" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" />
+                                </svg></mat-icon>
+                            </ion-card-subtitle>
+                        </div>
+
+                        <div (click)="openMap()" class="col-1 t-right">
+                            <div class="fab-button mat-elevation-z6">
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path d="M12,2L4.5,20.29L5.21,21L12,18L18.79,21L19.5,20.29L12,2Z" fill="#ffffff"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="!map">
+                        <hr>
+                        <p *ngFor="let item of data.order.items">• {{item.name}}</p>
+                        <hr>
+                        <h6>Name: {{data.order.drop.name}} </h6>
+                        <h6>Location : {{data.order.drop.googleLoc}}</h6>
+                        <h6>Address : {{data.order.drop.doorCode}}, {{data.order.pickup.building}},{{data.order.drop.postCode}}
+                            , {{data.order.drop.city}}, Finland</h6>
+                        <h6>Phone: <a href="tel:{{data.order.drop.phone}}">{{data.order.drop.phone}}</a></h6>
+                        <h6>Notes: {{data.order.drop.noteForRider}}</h6>
+                        <h6>Date: {{data.getHumanShortDate(data.order.date)}}</h6>
+                        <h6>Till: {{data.returnTime(data.order.till)}}</h6>
+                        <h6>Postcode: {{data.order.drop.postCode}}</h6>
+                        <h6>Req. People: {{data.order.people}} Person</h6>
+                        <h6>Req. Vehicle: {{data.order.vehicle.name}}</h6>
+                        <h6 [routerLink]="'/order-details/' + data.order.id" style="color: orangered;text-decoration: underline;cursor: pointer">View More Details</h6>
+                        <button (click)="data.markDropComplete()" class="pickup-button" mat-raised-button>Drop Complete
+                        </button>
+                    </div>
+                </div>
+            </ion-card>
+        </div>
+
+    </div>
+
+
+</ion-content>

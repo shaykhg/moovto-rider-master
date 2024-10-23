@@ -1,0 +1,94 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "assets/css/util.css";
+@import '~basscss/css/basscss.css';
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.heading
+{
+  font-family: 'Bitter', serif;
+}
+
+.logo
+{
+  font-family: 'Righteous', cursive;
+}
+
+.content-text
+{
+  font-family: 'PT Sans', sans-serif;
+}
+
+.full-width
+{
+  width: 100%;
+}
+
+.blue-button
+{
+  background: #2196F3;
+  color: whitesmoke;
+  padding: 1%;
+}
+
+.grey-button
+{
+  background: #009688;
+  color: whitesmoke;
+  padding: 1%;
+}
+
+.link-text
+{
+  color: dodgerblue;
+}
+
+.text-light-grey
+{
+  color: #767676;
+}
+
+.text-dark-grey
+{
+  color: #212121;
+}
+
+.green-button
+{
+  background: #4caf50;
+  color: whitesmoke;
+}
+
+.red-button
+{
+  background: #e82a13;
+  color: whitesmoke;
+}
+.mat-dialog-container {
+  padding: 10px!important;
+
+}

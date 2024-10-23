@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      My Profile
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="profile-card">
+    <ion-card-header>
+<!--      <ion-card-subtitle>Get Started</ion-card-subtitle>-->
+      <ion-card-title>Personal Information</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="user">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Full Name" [(ngModel)]="user.name" #name>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Email" [(ngModel)]="user.email" disabled="true">
+      </mat-form-field>
+
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Mobile" [(ngModel)]="user.mobile" #mobile>
+      </mat-form-field>
+
+<!--      <mat-form-field class="full-width">-->
+<!--        <input matInput placeholder="Password" type="password" [(ngModel)]="user.id" #password>-->
+<!--      </mat-form-field>-->
+      <button mat-raised-button class="blue-button" (click)="updateUser()">Save</button>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="profile-card">
+    <ion-card-header>
+      <ion-card-title>Payment Info</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="user">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Bank Name" [(ngModel)]="user.rider.bank" #bank>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="IBAN" [(ngModel)]="user.rider.iban" #iban>
+      </mat-form-field>
+
+
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Swift" [(ngModel)]="user.rider.swift" #swift>
+      </mat-form-field>
+
+      <button mat-raised-button class="blue-button" (click)="updatePaymentInfo()">Save</button>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

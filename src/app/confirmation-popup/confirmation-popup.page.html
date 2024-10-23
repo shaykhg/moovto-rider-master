@@ -1,0 +1,37 @@
+<div  *ngIf="socketService.delivery" class="p-0">
+
+    <img [src]="socketService.delivery.map" alt=""/>
+
+    <div class="content">
+      <ion-card-title>Delivery Request</ion-card-title>
+      <ion-card-subtitle>#{{socketService.delivery.id}}</ion-card-subtitle>
+      <hr>
+      <div *ngIf="socketService.delivery.items.length > 0" style="margin-bottom: 4px">
+        <p *ngFor="let item of socketService.delivery.items">• {{item.name}}</p>
+      </div>
+
+      <div *ngIf="socketService.delivery.items && socketService.delivery.items.length === 0" style="margin-bottom: 4px">
+        <b>Parcel Delivery</b>
+      </div>
+      <h6>Pickup location:{{socketService.delivery.pickup.googleLoc}}</h6>
+      <h6>Pickup City & Postcode: {{socketService.delivery.pickup.city}}, {{socketService.delivery.pickup.postCode}}</h6>
+      <h6>Drop Location: {{socketService.delivery.drop.googleLoc}}</h6>
+      <h6>Drop City & Postcode: {{socketService.delivery.drop.city}}, {{socketService.delivery.drop.postCode}}</h6>
+      <h6>Distance: {{socketService.delivery.distance}}KM</h6>
+      <h6>Req. people: {{socketService.delivery.people}} Person</h6>
+      <h6>Req. vehicle: {{socketService.delivery.vehicle.name}}</h6>
+      <h6><b>&euro; {{socketService.delivery.total}}</b></h6>
+      <br>
+
+      <button (click)="action(socketService.delivery.id, true)" class="green-button" mat-raised-button
+              style="margin-right: 20px">Accept
+      </button>
+      <button (click)="action(socketService.delivery.id, false)" class="m-l-30 red-button" mat-raised-button>
+        Reject
+      </button>
+
+
+    </div>
+
+
+</div>

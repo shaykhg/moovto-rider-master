@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Delivery Complete</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content style="background-color: #f0f0f0;">
+  <div >
+    <mat-card class="text-center m-t-10 m-l-10 m-r-10 mat-elevation-z6">
+      <h1>Great Job!</h1>
+      <mat-card-content>
+        <lottie-animation-view
+                [options]="lottieConfig"
+                [width]="200"
+                [height]="200"
+                (animCreated)="handleAnimation($event)">
+        </lottie-animation-view>
+
+        <h6>Delivery is completed successfully. You can check this delivery information anytime by going into delivery history.</h6>
+
+        <div class="row m-t-20">
+          <div class="col">
+            <button mat-raised-button class="red-button" routerLink="/">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Home &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+          </div>
+
+          <div class="col">
+            <button mat-raised-button class="blue-button" routerLink="/tabs/tab3">Order History</button>
+          </div>
+        </div>
+
+        <br>
+
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+</ion-content>

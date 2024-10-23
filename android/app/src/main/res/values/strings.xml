@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Moovto Rider</string>
+    <string name="title_activity_main">MoovTo Riders</string>
+    <string name="package_name">com.snatch.rider</string>
+    <string name="custom_url_scheme">com.snatch.rider</string>
+</resources>

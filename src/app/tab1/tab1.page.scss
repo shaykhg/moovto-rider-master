@@ -1,0 +1,65 @@
+.welcome-card img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+*
+{
+  font-family: 'Karla', sans-serif;
+}
+
+.content
+{
+  padding: 20px;
+}
+
+.map
+{
+  height: 90vh;
+}
+
+agm-map
+{
+  height: 88vh;
+}
+
+.delivery-details
+{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  z-index: 150;
+  height: auto;
+  font-size: medium;
+  //background-color: rgba(0, 0, 0, 0.18);
+}
+
+.delivery-card
+{
+  background-color: white;
+}
+
+.pickup-button
+{
+  background-color: dodgerblue;
+  color: whitesmoke;
+  margin-top: 10px;
+  border-radius: 20px;
+}
+
+.fab-button
+{
+  background-color: teal;
+  color: white;
+  display:block;
+  height: 40px;
+  width: 40px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid teal;
+}
+.text-red{
+  color: red;
+  font-weight: bold;
+}
